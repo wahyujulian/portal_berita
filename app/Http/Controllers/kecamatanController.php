@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kelurahaan;
+use App\Models\kecamatan;
 use Illuminate\Http\Request;
 
-class KelurahaanController extends Controller
+class kecamatanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $result = kelurahaan::all();
+        $result = kecamatan::all();
         return response()->json([
             'status' => true,
             'message' => 'Data berhasil ditampilkan',
@@ -41,20 +36,20 @@ class KelurahaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kelurahan' => 'required'
+            'kecamatan' => 'required'
         ]);
 
 
         if($request){
-            $check = kelurahaan::where('kelurahan', $request->kelurahan)->first();
+            $check = kecamatan::where('kecamatan', $request->kecamatan)->first();
             if($check != null){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Data kelurahan ' . $request->kelurahan . ' Sudah terdaftar'
+                    'message' => 'Data kecamatan ' . $request->kecamatan . ' Sudah terdaftar'
                 ]);
             }
 
-            $result = kelurahaan::create($request->all());
+            $result = kecamatan::create($request->all());
             return response()->json([
                 'status' => true,
                 'message' => 'Data berhasil ditambah',
@@ -70,10 +65,10 @@ class KelurahaanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\kelurahaan  $kelurahaan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
-    public function show(kelurahaan $kelurahaan)
+    public function show(kecamatan $kecamatan)
     {
         //
     }
@@ -81,10 +76,10 @@ class KelurahaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\kelurahaan  $kelurahaan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
-    public function edit(kelurahaan $kelurahaan)
+    public function edit(kecamatan $kecamatan)
     {
         //
     }
@@ -93,13 +88,13 @@ class KelurahaanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kelurahaan  $kelurahaan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'kelurahan' => 'required'
+            'kecamatan' => 'required'
         ]);
 
         if(!$request){
@@ -109,22 +104,22 @@ class KelurahaanController extends Controller
             ]);
         }
 
-        $check = kelurahaan::where('kelurahan', $request->kelurahan)->first();
+        $check = kecamatan::where('kecamatan', $request->kecamatan)->first();
         if($check != null){
             return response()->json([
                 'status' => false,
-                'message' => 'Data kelurahan ' . $request->kelurahan . ' Sudah terdaftar'
+                'message' => 'Data kecamatan ' . $request->kecamatan . ' Sudah terdaftar'
             ]);
         }
 
-        $data = kelurahaan::find($id);
+        $data = kecamatan::find($id);
         if(!$data){
             return response()->json([
                 'status' => false,
                 'message' => 'Data tidak ditemukan'
             ]);
         }
-        $data->update($request->only(['kelurahan']));
+        $data->update($request->only(['kecamatan']));
         return response()->json([
             'status' => true,
             'message' => 'Data berhasil diedit',
@@ -135,12 +130,12 @@ class KelurahaanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\kelurahaan  $kelurahaan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = kelurahaan::find($id);
+        $data = kecamatan::find($id);
         if(!$data){
             return response()->json([
                 'status' => false,

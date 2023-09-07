@@ -84,7 +84,8 @@ class UsersModelController extends Controller
         $request->validate([
             'username' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required'
         ]);
         
         if(!$request){
@@ -94,7 +95,7 @@ class UsersModelController extends Controller
         }
 
         $check = User::where('username', $request->username)->where('email', $request->email)->first();
-
+        // dd($check);
         if($check != null){
             return response()->json([
                 'status' => false,
@@ -105,8 +106,10 @@ class UsersModelController extends Controller
         $result = User::create([
             'username' => $request->username,
             'email' => $request->email,
-            'password' => bcrypt($request['password'])
+            'password' => bcrypt($request['password']),
+            'role' => $request->role
         ]);
+        // dd($result);
         return response()->json([
             'status' => true,
             'message' => 'Anda berhasil register',
