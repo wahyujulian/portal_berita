@@ -19,3 +19,4 @@ class kelurahaan extends Model
         return $this->hasMany(kecamatan::class);
     }
 }
+
